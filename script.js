@@ -1,25 +1,8 @@
-/**
- * Personal Portfolio Website - Main Script
- * 
- * This file handles the interactive features of the website:
- * 1. Dark/Light Theme Toggle
- * 2. Smooth Scrolling
- * 3. Scroll Reveal Animations
- * 
- * Structure:
- * - Section 1: DOMContentLoaded (Wait for page to load)
- * - Section 2: Theme Toggle Logic
- * - Section 3: Smooth Scrolling
- * - Section 4: Scroll Reveal Animation
- * - Section 5: Future Background Animation Placeholder
- */
+
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // ==========================================
-    // SECTION 1: THEME TOGGLE LOGIC
-    // ==========================================
-    // Handles switching between Dark and Light modes and saving preference.
+    
 
     const themeToggle = document.getElementById('theme-toggle');
     const htmlElement = document.documentElement;
@@ -114,18 +97,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    // ==========================================
-    // SECTION 4: FUTURE BACKGROUND ANIMATION
-    // ==========================================
-    /*
-     * The Background Animation has been removed as requested.
-     * 
-     * To add a new animation in the future:
-     * 1. Add a <canvas id="my-canvas"></canvas> in index.html
-     * 2. Initialize it here:
-     *    const canvas = document.getElementById('my-canvas');
-     *    const ctx = canvas.getContext('2d');
-     * 3. Add your animation loop using requestAnimationFrame().
-     */
+    
 
 });
