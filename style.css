@@ -675,3 +675,15 @@ ul {
     opacity: 1;
     transform: translateY(0);
 }
+
+
+/* Full-screen animated background */
+#spaceFabric {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1; /* Keeps it behind content */
+    background: #000; /* Space black */
+}
