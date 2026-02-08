@@ -2,7 +2,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    
+
 
     const themeToggle = document.getElementById('theme-toggle');
     const htmlElement = document.documentElement;
@@ -11,12 +11,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1.1 Check Local Storage for saved preference
     const savedTheme = localStorage.getItem('theme');
 
+    // Theme Logic: Default to Dark Mode if no preference is saved
     if (savedTheme) {
         htmlElement.setAttribute('data-theme', savedTheme);
         updateIcon(savedTheme);
     } else {
-        // Default to Dark Mode if no preference found
-        htmlElement.setAttribute('data-theme', 'dark');
+        htmlElement.setAttribute('data-theme', 'dark'); // Default
         updateIcon('dark');
         localStorage.setItem('theme', 'dark');
     }
@@ -96,9 +96,48 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(section);        // Start watching
     });
 
+    // ==========================================
+    // SECTION 4: MOBILE NAVIGATION
+    // ==========================================
 
-    
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const navLinksContainer = document.querySelector('.nav-links');
+    const mobileIcon = mobileMenuBtn.querySelector('i');
+
+    function toggleMobileMenu() {
+        navLinksContainer.classList.toggle('active');
+        mobileMenuBtn.classList.toggle('active');
+
+        // Toggle icon between List and X
+        if (navLinksContainer.classList.contains('active')) {
+            mobileIcon.classList.remove('ph-list');
+            mobileIcon.classList.add('ph-x');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling when menu open
+        } else {
+            mobileIcon.classList.remove('ph-x');
+            mobileIcon.classList.add('ph-list');
+            document.body.style.overflow = 'auto';
+        }
+    }
+
+    mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+
+    // Close menu when clicking a link
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            if (navLinksContainer.classList.contains('active')) {
+                toggleMobileMenu();
+            }
+        });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (navLinksContainer.classList.contains('active') &&
+            !navLinksContainer.contains(e.target) &&
+            !mobileMenuBtn.contains(e.target)) {
+            toggleMobileMenu();
+        }
+    });
 
 });
-
-
