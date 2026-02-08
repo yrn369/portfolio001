@@ -565,21 +565,6 @@ ul {
 }
 
 /* Education / Journey */
-.timeline {
-    max-width: 800px;
-    position: relative;
-}
-
-.timeline::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 5px;
-    bottom: 0;
-    width: 2px;
-    background: var(--border-color);
-}
-
 /* Education / Journey - Tech/Robotics Theme */
 .timeline {
     max-width: 800px;
@@ -587,21 +572,7 @@ ul {
     padding-left: 20px;
 }
 
-/* Tech Spine: Dashed Data Line */
-.timeline::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: repeating-linear-gradient(to bottom,
-            var(--accent-color) 0,
-            var(--accent-color) 4px,
-            transparent 4px,
-            transparent 8px);
-    opacity: 0.5;
-}
+/* Tech Spine REMOVED */
 
 .timeline-item {
     position: relative;
