@@ -799,10 +799,10 @@ ul {
   color: #22c55e; /* green vibe */
 }
 .project-status.in-progress {
-  color: #4e0b43; /* amber vibe */
+  color: #d67878; /* amber vibe */
 }
 .project-status.completed {
-  color: #0b642c; /* green vibe */
+  color: #6dcf91; /* green vibe */
 }
 
 
