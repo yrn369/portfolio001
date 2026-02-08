@@ -141,131 +141,62 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ==========================================
-    // SECTION 5: BACKGROUND ANIMATION (Space-Time / Neural)
+    // SECTION 5: Header Scroll & Glow Effects
     // ==========================================
 
-    const canvas = document.getElementById('bg-canvas');
-    const ctx = canvas.getContext('2d');
+    // 5.1 Header Scroll Effect
+    const navbar = document.querySelector('.navbar');
     
-    let width, height;
-    let particles = [];
-    let themeColor = 'rgba(0, 255, 136, '; // Default Dark (Green/Cyan)
-    
-    // Configuration
-    const particleCount = window.innerWidth < 768 ? 40 : 80; // Fewer on mobile
-    const connectionDistance = 150;
-    const waveSpeed = 0.005;
-    const waveAmplitude = 20;
-
-    // Handle Resize
-    function resize() {
-        width = canvas.width = window.innerWidth;
-        height = canvas.height = window.innerHeight;
-    }
-    
-    window.addEventListener('resize', () => {
-        resize();
-        initParticles();
-    });
-    resize();
-
-    // Particle Class
-    class Particle {
-        constructor() {
-            this.x = Math.random() * width;
-            this.y = Math.random() * height;
-            this.vx = (Math.random() - 0.5) * 0.5; // Slow horizontal drift
-            this.vy = (Math.random() - 0.5) * 0.5; // Slow vertical drift
-            this.size = Math.random() * 2 + 1;
-            this.baseY = this.y; // For wave motion
-            this.angle = Math.random() * 6.28; // Random starting angle for wave
-        }
-
-        update() {
-            // Move
-            this.x += this.vx;
-            this.y += this.vy;
-
-            // Space-time Wave Effect (Sine wave superimposed)
-            // We add a subtle sine wave calculation to the Y position
-            this.angle += waveSpeed;
-            this.y = this.baseY + Math.sin(this.angle + this.x * 0.01) * waveAmplitude;
-            this.baseY += this.vy; // Keep drifting the base
-
-            // Wrap around screen
-            if (this.x < 0) this.x = width;
-            if (this.x > width) this.x = 0;
-            if (this.baseY < 0) this.baseY = height;
-            if (this.baseY > height) this.baseY = 0;
-        }
-
-        draw() {
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fillStyle = themeColor + '0.5)';
-            ctx.fill();
-        }
-    }
-
-    function initParticles() {
-        particles = [];
-        for (let i = 0; i < particleCount; i++) {
-            particles.push(new Particle());
-        }
-    }
-
-    // Check Theme for Colors
-    function updateThemeColor() {
-        const currentTheme = htmlElement.getAttribute('data-theme');
-        if (currentTheme === 'dark') {
-            themeColor = 'rgba(0, 255, 136, '; // Neon Green/Cyan
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
         } else {
-            themeColor = 'rgba(37, 99, 235, '; // Blue
+            navbar.classList.remove('scrolled');
         }
-    }
+    });
 
-    // Observer to watch for theme attribute changes
-    const themeObserver = new MutationObserver(updateThemeColor);
-    themeObserver.observe(htmlElement, { attributes: true, attributeFilter: ['data-theme'] });
-    updateThemeColor(); // Initial check
+    // 5.2 Section Glow Effects (Intersection Observer)
+    const glowObserverOptions = {
+        threshold: 0.3 // Trigger when 30% visible
+    };
 
-    // Animation Loop
-    function animate() {
-        ctx.clearRect(0, 0, width, height);
-
-        // Update and Draw Particles
-        particles.forEach(p => {
-            p.update();
-            p.draw();
-        });
-
-        // Draw Connections (Neural Network)
-        for (let i = 0; i < particles.length; i++) {
-            for (let j = i + 1; j < particles.length; j++) {
-                const dx = particles[i].x - particles[j].x;
-                const dy = particles[i].y - particles[j].y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-
-                if (distance < connectionDistance) {
-                    ctx.beginPath();
-                    ctx.strokeStyle = themeColor + (1 - distance / connectionDistance) * 0.2 + ')'; // Fade out
-                    ctx.lineWidth = 1;
-                    ctx.moveTo(particles[i].x, particles[i].y);
-                    ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.stroke();
-                }
+    const glowObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Find all cards inside the section and add glow
+                const cards = entry.target.querySelectorAll('.project-card, .skill-card, .timeline-item');
+                cards.forEach((card, index) => {
+                    setTimeout(() => {
+                        card.classList.add('glow-active');
+                    }, index * 100); // Staggered effect
+                });
+            } else {
+                // Optional: Remove glow when scrolling away
+                const cards = entry.target.querySelectorAll('.project-card, .skill-card, .timeline-item');
+                cards.forEach(card => card.classList.remove('glow-active'));
             }
-        }
+        });
+    }, glowObserverOptions);
 
-        requestAnimationFrame(animate);
-    }
+    // Observe specific sections
+    const glowSections = document.querySelectorAll('#projects, #education, #skills');
+    glowSections.forEach(section => glowObserver.observe(section));
 
-    // Start everything
-    initParticles();
-    // Check for reduced motion preference
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    if (!mediaQuery.matches) {
-        animate();
-    }
+    // 5.3 Click Intensity Effect
+    const interactiveCards = document.querySelectorAll('.project-card, .skill-card, .timeline-item');
+    interactiveCards.forEach(card => {
+        card.addEventListener('click', () => {
+            // Remove from others (optional, keeps it cleaner)
+            interactiveCards.forEach(c => c.classList.remove('glow-intensify'));
+            
+            // Add to clicked
+            card.classList.add('glow-intensify');
+            
+            // Remove after 1 second (pulse effect)
+            setTimeout(() => {
+                card.classList.remove('glow-intensify');
+            }, 1000);
+        });
+    });
 
 });
