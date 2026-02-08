@@ -791,3 +791,17 @@ ul {
 
 
 
+/* Project Status Labels */
+.project-status {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.85rem;
+  color: #22c55e; /* green vibe */
+}
+.project-status.in-progress {
+  color: #f59e0b; /* amber vibe */
+}
+
+
+
+
