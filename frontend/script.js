@@ -165,29 +165,5 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    /* =====================================================
-       SECTION 6: BACK TO TOP ROCKET BUTTON 🚀
-    ===================================================== */
-
-    const backToTopBtn = document.getElementById('back-to-top');
-
-    // Show / hide button on scroll
-    window.addEventListener('scroll', () => {
-        backToTopBtn.classList.toggle('visible', window.scrollY > 500);
-    });
-
-    // Scroll to top with launch animation
-    backToTopBtn.addEventListener('click', () => {
-        backToTopBtn.classList.add('launch');
-
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-
-        setTimeout(() => {
-            backToTopBtn.classList.remove('launch');
-        }, 1000);
-    });
 
 });
