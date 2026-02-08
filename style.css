@@ -806,5 +806,16 @@ ul {
 }
 
 
+.photo-link {
+  color: #beccc6; /* green vibe */
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.photo-link:hover {
+  text-decoration: underline;
+}
+
+
 
 
