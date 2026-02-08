@@ -51,9 +51,17 @@ body {
 }
 
 /* 
-   Background Animation Styles Removed
-   (You can add new background effects here)
+   Background Animation Canvas
 */
+#bg-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Behind everything */
+    pointer-events: none; /* Let clicks pass through */
+}
 
 /* Utility Classes */
 .container {
