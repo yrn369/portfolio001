@@ -163,16 +163,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const glowObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // Find all cards inside the section and add glow
-                const cards = entry.target.querySelectorAll('.project-card, .skill-card, .timeline-item');
+                // Find all project and skill cards
+                const cards = entry.target.querySelectorAll('.project-card, .skill-card');
                 cards.forEach((card, index) => {
                     setTimeout(() => {
                         card.classList.add('glow-active');
                     }, index * 100); // Staggered effect
                 });
             } else {
-                // Optional: Remove glow when scrolling away
-                const cards = entry.target.querySelectorAll('.project-card, .skill-card, .timeline-item');
+                // Remove glow when scrolling away
+                const cards = entry.target.querySelectorAll('.project-card, .skill-card');
                 cards.forEach(card => card.classList.remove('glow-active'));
             }
         });
@@ -182,17 +182,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const glowSections = document.querySelectorAll('#projects, #education, #skills');
     glowSections.forEach(section => glowObserver.observe(section));
 
-    // 5.3 Click Intensity Effect
-    const interactiveCards = document.querySelectorAll('.project-card, .skill-card, .timeline-item');
+    // 5.3 Click Intensity Effect (Projects & Skills only)
+    const interactiveCards = document.querySelectorAll('.project-card, .skill-card');
     interactiveCards.forEach(card => {
         card.addEventListener('click', () => {
-            // Remove from others (optional, keeps it cleaner)
+            // Remove from others
             interactiveCards.forEach(c => c.classList.remove('glow-intensify'));
             
             // Add to clicked
             card.classList.add('glow-intensify');
             
-            // Remove after 1 second (pulse effect)
+            // Remove after 1 second
             setTimeout(() => {
                 card.classList.remove('glow-intensify');
             }, 1000);

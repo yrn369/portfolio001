@@ -580,32 +580,101 @@ ul {
     background: var(--border-color);
 }
 
-.timeline-item {
+/* Education / Journey - Tech/Robotics Theme */
+.timeline {
+    max-width: 800px;
     position: relative;
-    padding-left: 30px;
-    margin-bottom: 40px;
+    padding-left: 20px;
 }
 
+/* Tech Spine: Dashed Data Line */
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: repeating-linear-gradient(to bottom,
+            var(--accent-color) 0,
+            var(--accent-color) 4px,
+            transparent 4px,
+            transparent 8px);
+    opacity: 0.5;
+}
+
+.timeline-item {
+    position: relative;
+    padding-left: 40px; /* More space for the node */
+    margin-bottom: 50px;
+}
+
+/* Tech Node: Circuit Component style */
 .timeline-item::before {
     content: '';
     position: absolute;
-    left: -4px;
+    left: -6px; /* Center perfectly on line */
     top: 5px;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
+    width: 14px;
+    height: 14px;
+    background: var(--bg-color);
+    border: 2px solid var(--accent-color);
+    transform: rotate(45deg); /* Diamond shape */
+    box-shadow: 0 0 10px rgba(var(--accent-rgb), 0.5);
+    z-index: 2;
+    transition: all 0.3s ease;
+}
+
+/* Connecting Line to content */
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    left: 8px; /* From center info */
+    top: 12px;
+    width: 25px;
+    height: 1px;
     background: var(--accent-color);
+    opacity: 0.5;
+}
+
+.timeline-item:hover::before {
+    background: var(--accent-color);
+    box-shadow: 0 0 15px var(--accent-color);
+    transform: rotate(225deg);
 }
 
 .timeline-date {
     font-family: var(--font-mono);
     font-size: 0.9rem;
     color: var(--accent-color);
-    margin-bottom: 5px;
+    background: rgba(var(--accent-rgb), 0.1);
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    border: 1px solid rgba(var(--accent-rgb), 0.2);
+}
+
+/* HUD Style Card */
+.timeline-content {
+    background: rgba(var(--accent-rgb), 0.03);
+    border-left: 3px solid var(--accent-color);
+    padding: 20px;
+    position: relative;
+    transition: transform 0.3s ease;
+    /* No border radius on left to feel attached */
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.timeline-content:hover {
+    transform: translateX(10px);
+    background: rgba(var(--accent-rgb), 0.05);
 }
 
 .timeline-content h3 {
     margin-bottom: 5px;
+    font-size: 1.2rem;
 }
 
 .timeline-content h4 {
@@ -613,7 +682,11 @@ ul {
     color: var(--secondary-color);
     font-weight: 500;
     margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
+
 
 /* Contact Section */
 .contact-container {
