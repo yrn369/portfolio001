@@ -62,12 +62,13 @@ body {
     padding: 0 20px;
 }
 
+/* Responsive Section Padding */
 .section {
-    padding: 100px 0;
+    padding: clamp(60px, 10vw, 100px) 0;
 }
 
 .section-title {
-    font-size: 2rem;
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
     margin-bottom: 40px;
     font-family: var(--font-mono);
     position: relative;
@@ -154,18 +155,18 @@ ul {
 }
 
 
-/* Navbar */
+/* Navbar - Transparent & Minimal */
 .navbar {
     position: fixed;
     top: 0;
     width: 100%;
     height: 80px;
-    background: var(--nav-bg);
-    backdrop-filter: blur(10px);
+    background: transparent; /* Fully transparent */
+    backdrop-filter: none; /* Removed blur */
     z-index: 1000;
     display: flex;
     align-items: center;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: none; /* No border */
 }
 
 .nav-container {
@@ -281,8 +282,8 @@ ul {
 
 .profile-container {
     position: relative;
-    width: 320px;
-    height: 320px;
+    width: clamp(280px, 80vw, 320px);
+    height: clamp(280px, 80vw, 320px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -318,8 +319,8 @@ ul {
 
 /* Image Wrapper */
 .profile-img-btn {
-    width: 280px;
-    height: 280px;
+    width: 90%;
+    height: 90%;
     border-radius: 50%;
     overflow: hidden;
     position: relative;
@@ -706,11 +707,11 @@ ul {
     }
 
     .hero-name {
-        font-size: 3rem;
+        font-size: clamp(2.5rem, 10vw, 3.5rem);
     }
 
     .section {
-        padding: 60px 0;
+        padding: 50px 0;
     }
 }
 
