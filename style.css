@@ -206,7 +206,7 @@ ul {
 }
 
 .logo.active {
-    color: #ff4757; /* Alert Red when menu open */
+    color: #e0d5d6; /* Alert Red when menu open */
     text-shadow: 0 0 10px rgba(255, 71, 87, 0.6);
 }
 
