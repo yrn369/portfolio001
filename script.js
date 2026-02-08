@@ -199,6 +199,27 @@ document.addEventListener('DOMContentLoaded', () => {
                 card.classList.remove('glow-intensify');
             }, 1000);
         });
+        // ==========================================
+    // SECTION 6: BACK TO TOP BUTTON
+    // ==========================================
+    
+    const backToTopBtn = document.getElementById('back-to-top');
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 500) {
+            backToTopBtn.classList.add('visible');
+        } else {
+            backToTopBtn.classList.remove('visible');
+        }
     });
+
+    backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+
+});
 
 });
