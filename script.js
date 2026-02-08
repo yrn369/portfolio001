@@ -214,10 +214,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     backToTopBtn.addEventListener('click', () => {
+        // 1. Add Launch Class (Fly up animation)
+        backToTopBtn.classList.add('launch');
+
+        // 2. Smooth Scroll to Top
         window.scrollTo({
             top: 0,
             behavior: 'smooth'
         });
+
+        // 3. Reset after animation/scroll completes
+        setTimeout(() => {
+            backToTopBtn.classList.remove('launch');
+        }, 1000);
     });
 
 });
